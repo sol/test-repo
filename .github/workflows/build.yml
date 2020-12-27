@@ -13,5 +13,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: git tag v1.0.0
+      - run: git tag v0.4.0
       - run: git push --tags
