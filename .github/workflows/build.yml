@@ -1,0 +1,23 @@
+name: build
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: sol/test-repo@main
+        id: create-tag
+
+      - run: echo ">>> ${{ steps.create-tag.outputs.created }}"
+
+      - run: echo '>>> publish'
+        if: steps.create-tag.outputs.created
+
+      - run: echo ">>> don't publish"
+        if: "!steps.create-tag.outputs.created"
