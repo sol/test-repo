@@ -1,0 +1,26 @@
+name: Publish to Hackage
+description: Publish Haskell packages to Hackage
+
+branding:
+  icon: 'upload'
+  color: 'green'
+
+inputs:
+  package-path:
+    description: path to package
+    required: true
+    default: .
+
+outputs:
+  version: 
+    description: package version
+    value: ${{ steps.package-version.outputs.branch }}
+  version-tags: 
+    description: package version tags
+    value: ${{ steps.package-version.outputs.tags }}
+
+runs:
+  using: composite
+  steps:
+    - run: echo ":main ${{ inputs.path }}" | ghc --interactive -v0 ${{ github.action_path }}/src/PackageVersion.hs
+      id: package-version

@@ -11,10 +11,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - run: echo ":main" | ghc --interactive -v0 src/PackageVersion.hs
-        id: package-version
+      - uses: sol/test-repo@master
+        id: package
+        with:
+          package-path: .
 
-      - run: git tag v0.5.0
+      - run: git tag v${{ steps.package.outputs.package-version }}
       - run: git push --tags && echo '::set-output name=created::true' || echo 'exists'
         id: create-tag
 
