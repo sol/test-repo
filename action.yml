@@ -23,5 +23,6 @@ outputs:
 runs:
   using: composite
   steps:
-    - run: echo ":main ${{ inputs.path }}" | ghc --interactive -v0 ${{ github.action_path }}/src/PackageVersion.hs
+    - shell: bash
+      run: echo ":main ${{ inputs.path }}" | ghc --interactive -v0 ${{ github.action_path }}/src/PackageVersion.hs
       id: package-version
