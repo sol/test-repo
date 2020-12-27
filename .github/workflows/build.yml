@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
   build:
@@ -14,4 +11,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: git tag v0.4.0
-      - run: git push --tags
+      - run: git push --tags && echo '::set-output name=created::true' || '::set-output name=created::false'
+        id: create-tag
+
+      - run: echo ">>> ${{ steps.create-tag.outputs.created }}"
+
+      - if: steps.create-tag.outputs.created
+        run: echo '>>> publish'
