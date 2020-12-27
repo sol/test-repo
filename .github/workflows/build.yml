@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: git tag v0.5.0
-      - run: git push --tags && echo '::set-output name=created::true' || echo '::set-output name=created::false'
+      - run: git push --tags && echo '::set-output name=created::true' || echo 'exists'
         id: create-tag
 
       - run: echo ">>> ${{ steps.create-tag.outputs.created }}"
