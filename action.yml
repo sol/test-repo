@@ -1,9 +1,10 @@
-name: Publish to Hackage
-description: Publish Haskell packages to Hackage
+name: Package Version
+author: Simon Hengel
+description: Determine the version of a Haskell package
 
 branding:
-  icon: 'upload'
-  color: 'green'
+  icon: package
+  color: gray-dark
 
 inputs:
   package-path:
