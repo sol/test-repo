@@ -39,8 +39,6 @@ runs:
   using: composite
   steps:
     - shell: bash
-
-    - shell: bash
       run: cabal update
 
     - shell: bash
