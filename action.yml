@@ -1,10 +1,10 @@
-name: Package Version
+name: Run Tests
 author: Simon Hengel
-description: Determine the version of a Haskell package
+description: Run all tests of a Haskell package
 
 branding:
-  icon: tag
-  color: gray-dark
+  icon: green
+  color: check-square
 
 inputs:
   package-path:
@@ -39,10 +39,17 @@ runs:
   using: composite
   steps:
     - shell: bash
-      run: echo :main | ghc --interactive -v0 ${{ github.action_path }}/src/GitTag.hs
-      id: git-tag
+
+    - shell: bash
+      run: cabal update
+
+    - shell: bash
+      run: cabal configure --enable-tests --enable-benchmarks # NOTE: --enable-tests is necessary due to https://github.com/haskell/cabal/issues/5079
+
+    - shell: bash
+      run: cabal build all
+
+    - shell: bash
+      run: cabal test all --test-show-details=direct
       env:
-        TAG_PREFIX: ${{ inputs.tag-prefix }}
-        PACKAGE_PATH: ${{ inputs.package-path }}
-        TAG_PRE_RELEASES: ${{ inputs.tag-pre-releases }}
-        DRY_RUN: ${{ inputs.dry-run }}
+        HSPEC_OPTIONS: --color
