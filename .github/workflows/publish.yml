@@ -3,7 +3,7 @@ name: publish
 on:
   push:
     branches:
-      - main
+      - dev
 
 jobs:
   publish:
@@ -11,12 +11,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: sol/haskell-autotag@v1
+      - uses: sol/haskell-autotag@simplify-create-tag
         id: autotag
 
-      - run: cabal sdist
-      - uses: haskell-actions/hackage-publish@v1
-        with:
-          hackageToken: ${{ secrets.HACKAGE_AUTH_TOKEN }}
-          publish: true
-        if: steps.autotag.outputs.created
+#     - run: cabal sdist
+#     - uses: haskell-actions/hackage-publish@v1
+#       with:
+#         hackageToken: ${{ secrets.HACKAGE_AUTH_TOKEN }}
+#         publish: true
+#       if: steps.autotag.outputs.created
