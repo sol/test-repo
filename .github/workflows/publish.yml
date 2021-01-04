@@ -1,0 +1,22 @@
+name: publish
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: sol/haskell-autotag@simplify-create-tag
+        id: autotag
+
+#     - run: cabal sdist
+#     - uses: haskell-actions/hackage-publish@v1
+#       with:
+#         hackageToken: ${{ secrets.HACKAGE_AUTH_TOKEN }}
+#         publish: true
+#       if: steps.autotag.outputs.created
