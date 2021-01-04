@@ -5,7 +5,7 @@ cabal-version: 1.12
 -- see: https://github.com/sol/hpack
 
 name:           autotag
-version:        0.0.0
+version:        0.1.0
 author:         Simon Hengel <sol@typeful.net>
 maintainer:     Simon Hengel <sol@typeful.net>
 copyright:      (c) 2020-2021 Simon Hengel
